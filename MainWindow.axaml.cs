@@ -129,10 +129,13 @@ namespace TabCalc
                             previously.Text = text.Text.StartsWith('-') == true ? "(" + text.Text + ")/" : text.Text + "/";
                         }
                         break;
-                    case "But_equal": //Вылет при нажатии на "=" при отсутствии символов в малой строке
+                    case "But_equal": //Вылет при нажатии на "=" при отсутствии символов в малой строке ИСПРАВЛЕНО
                         {
-                            _numberNow = _numberPr;
-                            equal();
+                            if (previously.Text != "")
+                            {
+                                _numberNow = _numberPr;
+                                equal();
+                            }
                         }
                         break;
                 }
@@ -180,12 +183,12 @@ namespace TabCalc
             }
         }
 
-        private double factorial(double number) //метод для факториалап
+        private double factorial(double number) //метод для факториала
         {
             double numReturn = 1;
             if (number > 0)
             {
-                for (int i = 1; i < number; i++) //при использовании факториал не дойдет до корректного значения из-за потери последнего множителя
+                for (int i = 1; i <= number; i++) 
                 {
                     numReturn *= i;
                 }
@@ -193,7 +196,7 @@ namespace TabCalc
             }
             else if (number < 0) 
             {
-                for (int i = -1; i >= number; i--) 
+                for (int i = -1; i >/*=*/ number; i--) //при использовании факториал не дойдет до корректного значения из-за потери последнего множителя
                 {
                     numReturn *= i;
                 }
